@@ -8,8 +8,24 @@ function GenericViewCtrl($scope, $filter) {
 GenericViewCtrl.$inject = ['$scope'];
 
 
-function WalletCtrl($scope, $http, $filter, $sce, LS) {
+function YahoopipesCtrl($scope, $http, $filter, $sce, LS, pipesService, $q) {
 
+
+
+	  $scope.pipesService = pipesService;
+   
+	  $scope.pipesService.get();
+	  promiseYp.then(function(data) {
+		
+
+	  }, function(reason) {
+	   
+	    	
+	  }, function(update) {
+	    
+	  });	
+	
+	
 	
 
     $scope.ammounts = [];
