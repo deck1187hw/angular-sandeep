@@ -1,70 +1,39 @@
+<h1><i class="fa fa-newspaper-o"></i> My awesome news</h1>
 
-	<div class="row panel_c">
-	  <div class="col-md-12">	  
-		<form class="form-horizontal" role="form">
-		  
-		  
-		   <div add-element callback="addAmmount(arg1)" errors="showError(arg1)" currency="currency"></div>
-		   
-		   <div remove-element callback="removeAmmount(arg1)" errors="showError(arg1)"  currency="currency"></div>
-		  
-		  
+  
+<div class="" id="stories">
 
-		  <div class="form-group">
-		    <label for="currency" class="col-sm-2 control-label">Select currency</label>
-		    <div class="col-sm-3">
-		      <select name="currency" id="currency" class="form-control input-xs" ng-change="changeCurrency()" ng-model="currencySel">
-			      <option value="0" selected="selected">GBP</option>
-			      <option value="1">DOLLAR</option>
-			      <option value="2">EURO</option>
-		      </select>
-		    </div>
-
-		  </div>
-		</form>		  
-	  </div>
-	</div>
-	<hr />
-
-	 
-	 
-	<div class="alert_container">
-		<div class="alert alert-danger" role="alert" ng-show="error">
-			<button type="button" class="close" ng-click="error=false"><span aria-hidden="true">&times;</span></button>
-			<p>{{error}}</p>
-		</div>
-	</div>
-	
-	<div class="alert alert-info" role="alert" ng-show="ammounts.length == 0">
-			<p>Start adding some money into your waller</p>
-		</div>
-	
-	<div class="row ammounts" ng-show="ammounts.length > 0">
+	<div class="row">
 		<div class="col-md-12">
-			
-			<table class="table table-striped ammountTable">
-			  <thead>
-				  <tr>
-				  	<th class="date">Date</th>
-				  	<th class="ammount">Ammount</th>
-				  	<th>Info</th>
-				  </tr>
-			  </thead>
-			  <tbody>
-				  <tr ng-repeat="ammount in ammounts | reverse  track by $index">
-					<td>{{ammount.dateAdded}}</td>
-					<td>{{ammount.val}} <span ng-bind-html="currency.entityHtml"></span></td>			
-					<td>{{ammount.infostatus}}</td>						  
-				  </tr>
-				  <tr class="total">
-				  	<td>Total:</td>
-				  	<td colspan="2">
-					  	{{ getTotal() }} <i class="fa fa-{{currency.fontawesome}}"></i>
-				  	</td>
-
-				  </tr>
-			  </tbody>
-			  
-			</table>
-		</div>
+			<ul class="storiesList media-list">
+				<li class="media" ng-repeat="story in pipes.stories track by $index" id="story_{{$index}}" ng-click="readMore($index);">
+					<div class="img-container pull-left" ng-show="story['media:content'].url">
+					      <img class="media-object" ng-src="{{story['media:content'].url}}" alt="">
+					 
+					</div>
+					
+					<div class="img-container pull-left" ng-show="!story['media:content'].url">
+					      <div class="default_image">
+					      	<i class="fa fa-newspaper-o"></i>
+					      </div>
+					 
+					</div>
+					
+					<div class="media-body">
+				      <h4 class="media-heading">{{story.title}}</h4>
+				      
+				      
+					  <div class="description">
+					  	{{story.description | cleantext}}
+					  		<p>
+						  		<a href="{{story.link}}" ng-click="story.link" target="_blank" class="btn btn-default readmore"><i class="fa fa-external-link-square"></i> Read more</a>
+					  		</p>
+					  </div>
+				
+				    </div>
+				</li>
+			</ul>
+		</div>	
 	</div>
+
+</div>  
